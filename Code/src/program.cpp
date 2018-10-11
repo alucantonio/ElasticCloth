@@ -6,8 +6,8 @@
 #define Y_MIN           -1.0f
 #define X_MAX           1.0f
 #define Y_MAX           1.0f
-#define SIZE_X          201
-#define SIZE_Y          201
+#define SIZE_X          10
+#define SIZE_Y          10
 #define NUM_POINTS      (SIZE_X*SIZE_Y)
 #define DX              (float)((X_MAX-X_MIN)/SIZE_X)
 #define DY              (float)((Y_MAX-Y_MIN)/SIZE_Y)
@@ -292,10 +292,47 @@ void setup()
   dt->set(k2,17);                                                        // Setting kernel argument #15...
 }
 
+void save_vtk(float* position)
+{
+  printf("Action: Writing VTK file...");
+  char preamble[100];
+  snprintf(preamble, sizeof preamble, "# vtk DataFile Version 2.0\nCloth\n");
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "ASCII\n");
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "DATASET STRUCTURED_POINTS\n");
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "DIMENSIONS %i %i 1\n", SIZE_X, SIZE_Y);
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "ASPECT_RATIO 1 1 1\n");
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "ORIGIN 0 0 0\n");
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "POINT_DATA %i\n", NUM_POINTS);
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "SCALARS z-disp float 1\n");
+  write_file( "out.vtk", preamble);
+  snprintf(preamble, sizeof preamble, "LOOKUP_TABLE default\n");
+  write_file( "out.vtk", preamble);
+
+  for (int j = 0; j < SIZE_Y; j++)
+  {
+    for (int i = 0; i < SIZE_X; i++)
+    {
+      char buffer[20];
+      snprintf(buffer, sizeof buffer, "%f ", position[4*(i+SIZE_X*j)+2]);
+      write_file("out.vtk", buffer);
+    }
+    write_file("out.vtk","\n");
+  }
+
+  printf("DONE!\n");
+}
+
 void post_process(queue* q, point4* position)
 {
   // Save vertical position of midpoint every 10 time steps
-  if(time_step_number%50 == 0)
+  if(time_step_number%10 == 0)
   {
     float t;
     float x[4*NUM_POINTS];
@@ -322,6 +359,11 @@ void post_process(queue* q, point4* position)
     snprintf(buffer, sizeof buffer, "%f,%f\n", t, y);
     printf("T = %f\n", simulation_time);
     write_file("out.csv", buffer);
+
+    if(time_step_number==10)
+    {
+      save_vtk(x);
+    }
   }
 }
 
