@@ -66,9 +66,12 @@ if(UNIX AND NOT APPLE)                                                          
   add_executable(${TARGET_1} ${SOURCES_1})                                                          # Adding executable...
 
   message("Adding include files...")                                                                # Printing message...
-  set(INCLUDES                                                                                      # Setting "INCLUDES" variable...
+  set(INCLUDES_1
+    ${GLAD_PATH}/include                                                                            # GLAD include diretory.
+    ${GLFW_PATH}                                                                                    # GLFW include directory.
+    ${GMSH_PATH}
     ${CMAKE_HOME_DIRECTORY}/include                                                                 # Example include directory.
-    ${NEUTRINO_PATH}/include)                                                                       # Neutrino include directory.
+    ${NEUTRINO_PATH}/Code/include)                                                                  # Neutrino include directory.
   target_include_directories(                                                                       # Setting include directories...
     ${TARGET_1} PRIVATE                                                                             # Target name.
     ${INCLUDES_1})                                                                                  # All include directories.
@@ -81,7 +84,7 @@ if(UNIX AND NOT APPLE)                                                          
     "-ldl"                                                                                          # "libdl" library.
     "-lglfw"                                                                                        # GLFW library.
     "-lm"                                                                                           # "math" library.
-    ${NEUTRINO_PATH}/lib/libnu.a)                                                                   # "neutrino" library.
+    ${NEUTRINO_PATH}/lib/libneutrino.a)                                                                   # "neutrino" library.
 endif(UNIX AND NOT APPLE)
 
 if(WIN32)                                                                                           # Detecting WINDOWS...
@@ -172,8 +175,11 @@ if(UNIX AND NOT APPLE)                                                          
 
   message("Adding include files...")                                                                # Printing message...
   set(INCLUDES_2                                                                                    # Setting "INCLUDES" variable...
+    ${GLAD_PATH}/include                                                                            # GLAD include diretory.
+    ${GLFW_PATH}                                                                                    # GLFW include directory.
+    ${GMSH_PATH}
     ${CMAKE_HOME_DIRECTORY}/include                                                                 # Example include directory.
-    ${NEUTRINO_PATH}/include)                                                                       # Neutrino include directory.
+    ${NEUTRINO_PATH}/Code/include)                                                                  # Neutrino include directory.
   target_include_directories(                                                                       # Setting include directories...
     ${TARGET_2} PRIVATE                                                                             # Target name.
     ${INCLUDES_2})                                                                                  # All include directories.
@@ -186,7 +192,7 @@ if(UNIX AND NOT APPLE)                                                          
     "-ldl"                                                                                          # "libdl" library.
     "-lglfw"                                                                                        # GLFW library.
     "-lm"                                                                                           # "math" library.
-    ${NEUTRINO_PATH}/lib/libnu.a)                                                                   # "neutrino" library.
+    ${NEUTRINO_PATH}/lib/libneutrino.a)                                                                   # "neutrino" library.
 endif(UNIX AND NOT APPLE)
 
 if(WIN32)                                                                                           # Detecting WINDOWS...
@@ -277,8 +283,11 @@ if(UNIX AND NOT APPLE)                                                          
 
   message("Adding include files...")                                                                # Printing message...
   set(INCLUDES_3                                                                                    # Setting "INCLUDES" variable...
+    ${GLAD_PATH}/include                                                                            # GLAD include diretory.
+    ${GLFW_PATH}                                                                                    # GLFW include directory.
+    ${GMSH_PATH}
     ${CMAKE_HOME_DIRECTORY}/include                                                                 # Example include directory.
-    ${NEUTRINO_PATH}/include)                                                                       # Neutrino include directory.
+    ${NEUTRINO_PATH}/Code/include)                                                                  # Neutrino include directory.
   target_include_directories(                                                                       # Setting include directories...
     ${TARGET_3} PRIVATE                                                                             # Target name.
     ${INCLUDES_3})                                                                                  # All include directories.
@@ -291,7 +300,7 @@ if(UNIX AND NOT APPLE)                                                          
     "-ldl"                                                                                          # "libdl" library.
     "-lglfw"                                                                                        # GLFW library.
     "-lm"                                                                                           # "math" library.
-    ${NEUTRINO_PATH}/lib/libnu.a)                                                                   # "neutrino" library.
+    ${NEUTRINO_PATH}/lib/libneutrino.a)                                                                   # "neutrino" library.
 endif(UNIX AND NOT APPLE)
 
 if(WIN32)                                                                                           # Detecting WINDOWS...
@@ -383,8 +392,11 @@ if(UNIX AND NOT APPLE)                                                          
 
   message("Adding include files...")                                                                # Printing message...
   set(INCLUDES_4                                                                                    # Setting "INCLUDES" variable...
+    ${GLAD_PATH}/include                                                                            # GLAD include diretory.
+    ${GLFW_PATH}                                                                                    # GLFW include directory.
+    ${GMSH_PATH}
     ${CMAKE_HOME_DIRECTORY}/include                                                                 # Example include directory.
-    ${NEUTRINO_PATH}/include)                                                                       # Neutrino include directory.
+    ${NEUTRINO_PATH}/Code/include)                                                                  # Neutrino include directory.
   target_include_directories(                                                                       # Setting include directories...
     ${TARGET_4} PRIVATE                                                                             # Target name.
     ${INCLUDES_4})                                                                                  # All include directories.
@@ -398,7 +410,7 @@ if(UNIX AND NOT APPLE)                                                          
     "-lglfw"                                                                                        # GLFW library.
     "-lm"                                                                                           # "math" library.
     "-lgmsh"                                                                                        # GMSH library.
-    ${NEUTRINO_PATH}/lib/libnu.a)                                                                   # "neutrino" library.
+    ${NEUTRINO_PATH}/lib/libneutrino.a)                                                                   # "neutrino" library.
 endif(UNIX AND NOT APPLE)
 
 if(WIN32)                                                                                           # Detecting WINDOWS...
